@@ -8,6 +8,7 @@ public class LivingThing {
     private double defence;
     private double avoid;
     private double hit;
+    private boolean dead;
     
 
     public LivingThing(String name,double HP,double power,double defence,double avoid,double hit){
@@ -17,14 +18,21 @@ public class LivingThing {
         this.defence = defence;  //丈夫さ
         this.avoid = avoid;  //回避率
         this.hit = hit;  //命中率
+        this.dead = false;  //生存状況。trueなら死んでいる。
+    }
+
+    
+
+    public void damaged(double damage){  //引数にダメージを入れ、その分だけHPが減少する。
+        this.HP -= damage;
     }
     //以下、setter,getterメソッド
     public void setName(String name){
         this.name = name;
     }
 
-    public void setHP(double HP){
-        this.HP = HP;
+    public void setHP(double newHP){
+        this.HP = newHP;
     }
 
     public void setPower(double power){
@@ -66,4 +74,13 @@ public class LivingThing {
     public double getHit(){
         return this.hit;
     }
+
+    public void setDead(boolean D){
+        this.dead = D;
+    }
+
+    public boolean isDead(){
+        return this.dead;
+    }
 }
+
