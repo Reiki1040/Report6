@@ -5,12 +5,14 @@ public class NurtureChara extends LivingThing { //育成するキャラのクラ
     private double loyalty;
     private double tired;
     ArrayList<Action> actions;
+    ArrayList<Action> attacks;
 
-    public NurtureChara(String name,double HP,double power,double defence,double avoid,double hit,double loyalty,double tired){
-        super(name,HP,power,defence,avoid,hit);
+    public NurtureChara(String name,double HP,double power,double defence,double avoid,double hit,double stamina,double loyalty,double tired){
+        super(name,HP,power,defence,avoid,hit,stamina);
         this.loyalty = loyalty; //忠誠度
         this.tired = tired;  //疲労度
         this.actions = new ArrayList<>();
+        this.attacks = new ArrayList<>();
     }
     
     public void addAction(Action act){  //朝昼夜に行うアクション(選択肢)を追加するメソッド
@@ -24,7 +26,19 @@ public class NurtureChara extends LivingThing { //育成するキャラのクラ
             index += 1;
         }
     }
+    
+    public void addAttack(Action attack){
+        this.attacks.add(attack);
+    }
+    public void showAttacks(){//攻撃を表示するメソッド。
+        int index = 0;
+        for(var attack:attacks){
+            System.out.println(index + ":" + attack.getActionName());
+            index +=1;
+        }
+    } 
 
+    
 
 
     public void setLoyalty(double loyalty){
@@ -43,17 +57,9 @@ public class NurtureChara extends LivingThing { //育成するキャラのクラ
         return this.tired;
     }
 
-    public void greetBadCondition(){
-        System.out.println(this.getName()+"  「イライラする...」"); //起こされた時の台詞
-    }
-
-    public void greetGoodCondition(){
-        System.out.println(this.getName()+"  「おはようございます!!」");  //起こされた時の台詞
-    }
-
     public void showStatus(){  //ステータスを表示するメソッド。
         System.out.println(this.getName()+"のステータス");
-        System.out.println("HP "+this.getHP()+"、筋力 "+this.getPower()+"、丈夫さ "+this.getDefence()+"、回避率 "+this.getAvoid()+"、命中率 "+this.getHit()+"、忠誠度 "+this.getLoyalty()+"、疲労度 "+this.getTired());
+        System.out.println("HP "+this.getHP()+"、筋力 "+this.getPower()+"、丈夫さ "+this.getDefence()+"、回避率 "+this.getAvoid()+"、命中率 "+this.getHit()+"、スタミナ "+this.getStamina()+"、忠誠度 "+this.getLoyalty()+"、疲労度 "+this.getTired());
     }
 
     
