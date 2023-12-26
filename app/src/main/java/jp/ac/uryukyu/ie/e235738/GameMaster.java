@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class GameMaster { 
 
-    public void timeKeep(int time){
+    public void timeKeep(int time){ //テキストを時間をおいて表示したいので作成。引数（ミリ秒）の秒数止める。
         try{Thread.sleep(time);
             }catch(InterruptedException e){
         }
@@ -119,9 +119,10 @@ public class GameMaster {
 
         System.out.println("ゲームスタート!!!");
 
-        Game.timeKeep(1000);           
+        Game.timeKeep(1000);     
+
         int i = 0;
-        for (int day = 1; day < 11;day ++){
+        for (int day = 1; day < 11;day ++){  //育成パート。
                 for(i = 0; i < 3; i++){
                     System.out.println("---- "+day+ " 日目---- "+ time.get(i));
                     Game.timeKeep(700);
