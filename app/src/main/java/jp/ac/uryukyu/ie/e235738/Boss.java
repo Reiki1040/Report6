@@ -19,7 +19,7 @@ public class Boss extends LivingThing{
             }
     }
 
-    public void addAttack(Attack attack){
+    public void addAttack(Action attack){
         this.attacks.add(attack);
     }
 

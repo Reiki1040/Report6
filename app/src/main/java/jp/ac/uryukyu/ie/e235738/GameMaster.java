@@ -122,9 +122,9 @@ public class GameMaster {
         chara.addAction(rest);
 
         //攻撃を生成,攻撃の選択肢に追加
-        Attack punch = new Attack(0, "殴る");
-        Attack tackle = new Attack(1, "タックル");
-        Attack resthp = new Attack(2, "休憩");
+        Action punch = new Action(0, "殴る");
+        Action tackle = new Action(1, "タックル");
+        Action resthp = new Action(2, "休憩");
         chara.addAttack(punch);
         chara.addAttack(tackle);
         chara.addAttack(resthp);
