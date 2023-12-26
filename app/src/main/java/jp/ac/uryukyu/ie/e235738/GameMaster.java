@@ -6,9 +6,46 @@ import java.util.Random;
 
 public class GameMaster { 
 
+     ArrayList<String> time;
+
     public void timeKeep(int time){ //テキストを時間をおいて表示したいので作成。引数（ミリ秒）の秒数止める。
         try{Thread.sleep(time);
             }catch(InterruptedException e){
+        }
+    }
+
+    public void nurturing(NurtureChara chara,GameMaster Game){
+        int i = 0;
+        for (int day = 1; day < 11;day ++){  //第一引数のキャラを育成するメソッド。
+                for(i = 0; i < 3; i++){
+                    System.out.println("---- "+day+ " 日目---- "+ time.get(i));
+                    Game.timeKeep(700);
+
+                    if(time.get(i) == "朝"){chara.actions.get(0).wakeUp(chara); //朝だったら起こす。
+                    }
+
+                    chara.showStatus();
+                    
+                    Game.timeKeep(800);
+
+                    System.out.println("行いたい行動の番号を指定してください。"); 
+                    Game.timeKeep(1000);
+                    chara.showActions();
+
+                    Scanner actionScanner = new Scanner(System.in);
+                    String actSelect = actionScanner.nextLine();
+                    
+                    try{int actSelecter = Integer.parseInt(actSelect);
+                        chara.actions.get(actSelecter).doAction(chara);
+                    }catch(NumberFormatException e){
+                        System.out.println("数字を入力してください。");
+                    }
+
+                        if(time.get(i) == "夜"){
+                            chara.actions.get(0).sleep(chara); //夜だったら眠らせる。
+                        }
+                    }
+                
         }
     }
 
@@ -46,15 +83,17 @@ public class GameMaster {
             }
     }
 
-    GameMaster(){
+    GameMaster(ArrayList time){
+        this.time = time;
     }
 
     public static void main(String[] args) {
-        GameMaster Game = new GameMaster();
+
         ArrayList<String> time = new ArrayList<>();
         time.add("朝");
         time.add("昼");
         time.add("夜");
+        GameMaster Game = new GameMaster(time);
 
         ArrayList<LivingThing> order = new ArrayList<>(); //戦闘時の順番を決めるためのリスト。
         Scanner scanner = new Scanner(System.in);
@@ -121,40 +160,8 @@ public class GameMaster {
 
         Game.timeKeep(1000);     
 
-        int i = 0;
-        for (int day = 1; day < 11;day ++){  //育成パート。
-                for(i = 0; i < 3; i++){
-                    System.out.println("---- "+day+ " 日目---- "+ time.get(i));
-                    Game.timeKeep(700);
+        Game.nurturing(chara,Game); //育成を行う。
 
-                    if(time.get(i) == "朝"){chara.actions.get(0).wakeUp(chara); //朝だったら起こす。
-                    }
-
-                    chara.showStatus();
-                    
-                    Game.timeKeep(800);
-
-                    System.out.println("行いたい行動の番号を指定してください。"); 
-                    Game.timeKeep(1000);
-                    chara.showActions();
-
-                    Scanner actionScanner = new Scanner(System.in);
-                    String actSelect = actionScanner.nextLine();
-                    
-                    try{int actSelecter = Integer.parseInt(actSelect);
-                        chara.actions.get(actSelecter).doAction(chara);
-                    }catch(NumberFormatException e){
-                        System.out.println("数字を入力してください。");
-                    }
-
-                        if(time.get(i) == "夜"){
-                            chara.actions.get(0).sleep(chara); //夜だったら眠らせる。
-                        }
-                    }
-                
-        }
-
-        //戦闘パート
         System.out.println("育成お疲れ様でした。");
 
         Game.timeKeep(1000);      
