@@ -1,4 +1,5 @@
 package jp.ac.uryukyu.ie.e235738;
+import java.util.Random;
 
 //育成キャラ、ボスキャラクラスのスーパークラス。
 public class LivingThing {

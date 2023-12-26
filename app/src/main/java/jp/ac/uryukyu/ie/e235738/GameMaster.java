@@ -4,19 +4,65 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameMaster {
+public class GameMaster { 
+
+    public void timeKeep(int time){
+        try{Thread.sleep(time);
+            }catch(InterruptedException e){
+        }
+    }
+
+    public void battle(NurtureChara chara,Boss boss,GameMaster Game){ //戦闘をするメソッド。第一引数に育成したキャラ、第二引数にボスキャラ。
+        while(chara.isDead() != true && boss.isDead() != true){
+
+            chara.showStatus(); //ターンの最初に育成キャラ、ボスキャラの順番でステータスを表示
+            boss.showStatus();
+            
+            System.out.println("行いたい行動の番号を指定してください。(半角入力)");
+
+            Game.timeKeep(1000);}
+
+            chara.showAttacks();
+            
+            Scanner attackScanner = new Scanner(System.in);
+            String attackSelect = attackScanner.nextLine();
+
+            try{int attackSelecter = Integer.parseInt(attackSelect);
+
+            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss); //育成キャラがボスに攻撃。
+
+            }catch(NumberFormatException e){
+                System.out.println("数字を入力してください");
+            }
+                    if(boss.isDead()==true){ //ボスが倒れた時の処理。
+                        System.out.println("クリア!!!");
+                    }else{   //ボスが生きていた時の処理。
+                        Random RANDOM = new Random();
+                        int bossAttack = RANDOM.nextInt(5);
+                        boss.attack(bossAttack,chara,boss);
+                          if(chara.isDead()==true){ //育成キャラが倒れた時の処理。
+                              System.out.println("ゲームオーバー");
+                }
+            }
+    }
+
+    GameMaster(){
+    }
 
     public static void main(String[] args) {
-        
+        GameMaster Game = new GameMaster();
+        ArrayList<String> time = new ArrayList<>();
+        time.add("朝");
+        time.add("昼");
+        time.add("夜");
+
         ArrayList<LivingThing> order = new ArrayList<>(); //戦闘時の順番を決めるためのリスト。
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("プログラミング2課題6で制作した育成ゲームです。");
-
-        try{ Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
         
+        Game.timeKeep(1000);
+    
         System.out.println("育成するキャラクターの名前を入力してください。");
          
         String name = scanner.nextLine();
@@ -45,170 +91,96 @@ public class GameMaster {
         chara.addAttack(resthp);
 
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(1000);
         
         System.out.println(chara.getName()+" が産まれました!!");
-
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
+        
+        Game.timeKeep(1000);
 
         chara.showStatus();     //この時点でキャラクターの作成が完了。
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(1000);
 
         System.out.println("このゲームのルールを説明します。");
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(1000);
 
         System.out.println("朝、昼、夜にプレイヤーは選択肢から行動を１つ選び、選ばれた行動によってステータスが変動します。");
 
-        try{Thread.sleep(2000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(2000);
 
         System.out.println("1日に3回行動を行い、10日過ごした後にボスとの戦闘が始まります。");
 
-        try{Thread.sleep(2000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(2000);
 
         System.out.println("ステータスを調整していき、11日目にボスを打ち倒すことが目的です。");
 
-        try{Thread.sleep(2000);
-        }catch(InterruptedException e){
-        }
+        Game.timeKeep(2000);
 
         System.out.println("ゲームスタート!!!");
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }           
-/* 
+        Game.timeKeep(1000);           
+        int i = 0;
         for (int day = 1; day < 11;day ++){
-            System.out.println("---- "+day+ " 日目---- 朝");
-            try{ Thread.sleep(1000);
-            }catch(InterruptedException e){
-            }
+                for(i = 0; i < 3; i++){
+                    System.out.println("---- "+day+ " 日目---- "+ time.get(i));
+                    Game.timeKeep(700);
 
-            chara.actions.get(0).wakeUp(chara);
-            chara.showStatus();
-            
-        try{ Thread.sleep(1000);
-        }catch(InterruptedException e){
-        }
+                    if(time.get(i) == "朝"){chara.actions.get(0).wakeUp(chara); //朝だったら起こす。
+                    }
 
-        System.out.println("行いたい行動の番号を指定してください。(半角入力)"); 
-        try{ Thread.sleep(500);
-        }catch(InterruptedException e){
-        }
-        chara.showActions();
+                    chara.showStatus();
+                    
+                    Game.timeKeep(800);
 
-        Scanner actionScanner = new Scanner(System.in);
-        String actSelect = actionScanner.nextLine();
-        int actSelecter = Integer.parseInt(actSelect);
+                    System.out.println("行いたい行動の番号を指定してください。"); 
+                    Game.timeKeep(1000);
+                    chara.showActions();
 
-        chara.actions.get(actSelecter).doAction(chara);
+                    Scanner actionScanner = new Scanner(System.in);
+                    String actSelect = actionScanner.nextLine();
+                    
+                    try{int actSelecter = Integer.parseInt(actSelect);
+                        chara.actions.get(actSelecter).doAction(chara);
+                    }catch(NumberFormatException e){
+                        System.out.println("数字を入力してください。");
+                    }
 
-        //昼のアクション。
-        System.out.println("---- "+day + "日目---- 昼");
-        System.out.println("行いたい行動の番号を指定してください。(半角入力)"); 
-        try{ Thread.sleep(500);
-        }catch(InterruptedException e){
-        }
-        chara.showStatus();
-        chara.showActions();
-
-        Scanner actionScanner2 = new Scanner(System.in);
-        String actSelect2 = actionScanner2.nextLine();
-        int actSelecter2 = Integer.parseInt(actSelect2);
-
-        chara.actions.get(actSelecter2).doAction(chara);
-
-        //夜のアクション。
-        System.out.println("---- " + day + "日目---- 夜");
-        System.out.println("行いたい行動の番号を指定してください。(半角入力)"); 
-        try{ Thread.sleep(500);
-        }catch(InterruptedException e){
-        }
-        chara.showStatus();
-        chara.showActions();
-
-        Scanner actionScanner3 = new Scanner(System.in);
-        String actSelect3 = actionScanner3.nextLine();
-        int actSelecter3 = Integer.parseInt(actSelect3);
-
-        chara.actions.get(actSelecter3).doAction(chara);
-
-        chara.actions.get(0).sleep(chara);
-
+                        if(time.get(i) == "夜"){
+                            chara.actions.get(0).sleep(chara); //夜だったら眠らせる。
+                        }
+                    }
+                
         }
 
         //戦闘パート
         System.out.println("育成お疲れ様でした。");
-        try{ Thread.sleep(1000);
-            }catch(InterruptedException e){
-        }       */
 
+        Game.timeKeep(1000);      
+
+        chara.setMaxHP(chara.getHP());//現時点でのHPをHPの最大値とする。
+        chara.setMaxStamina(chara.getStamina());//現時点でのスタミナをスタミナの最大値とする。
 
         System.out.println("-------11日目-------");
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        } 
+        Game.timeKeep(1000);
 
-        Boss boss = new Boss("デンチウ", 300, 100, 100, 150, 150, 5000);
-
+        Boss boss = new Boss("デンチウ", 220, 50, 50, 140, 150, 5000); //ボス生成。
+        boss.setMaxHP(220);
         order.add(chara);
         order.add(boss);
 
         System.out.println(boss.getName() + " が現れた!!!");
 
-        try{Thread.sleep(1000);
-        }catch(InterruptedException e){
-        } 
+        Game.timeKeep(1000);
      
         System.out.println("----戦闘開始----");
 
-        while(chara.isDead() != true && boss.isDead() != true){
-            chara.showStatus();
-            boss.showStatus();
-            
-            System.out.println("行いたい行動の番号を指定してください。(半角入力)");
-            try{ Thread.sleep(500);
-            }catch(InterruptedException e){
-            }
-            chara.showAttacks();
-            
-            Scanner attackScanner = new Scanner(System.in);
-            String attackSelect = attackScanner.nextLine();
-            int attackSelecter = Integer.parseInt(attackSelect);
+        Game.timeKeep(1500);
 
-            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss);
-            if(boss.isDead()==true){
-                System.out.println("クリア!!!");
-            }else{
-                Random RANDOM = new Random();
-            int bossAttack = RANDOM.nextInt(5);
-            boss.attack(bossAttack,chara,boss);
-                if(chara.isDead()==true){
-                    System.out.println("ゲームオーバー");
-                }
-            }
+        Game.battle(chara, boss, Game); //戦闘を行う。
 
-            
-            
-        }
-
-
-
-        
+        } 
 
     }
-}
+

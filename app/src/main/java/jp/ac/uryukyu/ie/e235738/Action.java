@@ -1,7 +1,7 @@
 package jp.ac.uryukyu.ie.e235738;
 
 import java.util.Random;
-import java.util.ArrayList;
+
 
 public class Action {
     private int actionID;
@@ -30,11 +30,13 @@ public class Action {
 
 
     public double addTired(NurtureChara chara){ //疲労度を0~2追加するメソッド。
+        
         Random Rnd = new Random();
-        double upTired = Rnd.nextInt(3);
-        double newTired = chara.getTired() + upTired;
+        double upTired = Rnd.nextInt(3); //upTired = 0~2の整数。
+        double newTired = chara.getTired() + upTired;  //charaのtiredにupTiredを追加。
         chara.setTired(newTired);
         System.out.println(chara.getName() + " の疲労度が "+chara.getTired() + " になった");
+
         try{Thread.sleep(1000);
             }catch(InterruptedException e){
             }
@@ -56,21 +58,23 @@ public class Action {
 
     public boolean isSuccess(double tired){ //引数に疲労度を入れ、アクションが成功するかを判定するメソッド。
         Random z = new Random();
-        double judge = z.nextInt(11);
-        if(judge < tired){
-            return false;   //失敗したらfalseを返す。
-        }else{
-            return true;   //成功したらtrue を返す。
-        }
+        double judge = z.nextInt(11);  //judge=０〜１０の整数を生成しする。
+            if(judge < tired){ // judge より引数に渡された疲労度tiredのほうが大きかった場合、失敗。
+                return false;   //失敗したらfalseを返す。
+            }else{
+                return true;   //成功したらtrue を返す。
+            }
     }
 
-    public void wakeUp(NurtureChara chara){ //朝に起こして機嫌を決め、機嫌が良ければステータスがランダムに一つ上がる。。
+    public void wakeUp(NurtureChara chara){ //朝に起こして機嫌を決め、機嫌が良ければステータスがランダムに上がる。
         Random RND = new Random();
         double X = RND.nextInt(16);
         System.out.println(chara.getName()+"を起こした!!");
+
         try{Thread.sleep(1000);
              }catch(InterruptedException e){
              }
+
         if(X < chara.getLoyalty()){
              System.out.println("今日は"+chara.getName()+"の機嫌が良い!!");
              try{Thread.sleep(1000);
@@ -78,64 +82,68 @@ public class Action {
              }
             Random G = new Random();
             int K = G.nextInt(3);
-            switch(K){
-                case 0:
-                double newHP = chara.getHP() + 10;
-             chara.setHP(newHP);
+                switch(K){
+                    case 0:
 
-             System.out.println(chara.getName()+"のHPが "+chara.getHP()+" になった!!" );
+                    double newHP = chara.getHP() + 50;
+                chara.setHP(newHP);
 
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
-             break;
-             case 1:
-              Random rndPower = new Random();
-             double upValue = rndPower.nextInt(2) + 1;
-             double newPower = chara.getPower() + upValue;
-             chara.setPower(newPower);
+                System.out.println(chara.getName()+"のHPが "+chara.getHP()+" になった!!" );
 
-             Random rndDefence = new Random();
-             double upD = rndDefence.nextInt(2) + 1;
-             double newDefence = chara.getDefence() + upD;
-             chara.setDefence(newDefence);
+                try{Thread.sleep(1000);
+                }catch(InterruptedException e){
+                }
+                break;
 
-             System.out.println(chara.getName()+"の筋力が "+chara.getPower() + " になった!!");
-            
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
+                case 1:
 
-             System.out.println(chara.getName()+"の丈夫さが "+chara.getDefence()+" になった!!");
-            
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
-             break;
+                Random rndPower = new Random();
+                double upValue = rndPower.nextInt(5) + 4;
+                double newPower = chara.getPower() + upValue;
+                chara.setPower(newPower);
 
-             case 2:
-             Random rndAvoid = new Random();
-             double upAvoid = rndAvoid.nextInt(12) + 8;
-             double newAvoid = chara.getAvoid() + upAvoid;
-             chara.setAvoid(newAvoid);
+                Random rndDefence = new Random();
+                double upD = rndDefence.nextInt(5) + 4;
+                double newDefence = chara.getDefence() + upD;
+                chara.setDefence(newDefence);
 
-             Random rndHit = new Random();
-             double upHit = rndHit.nextInt(12) + 8;
-             double newHit = chara.getHit() + upHit;
-             chara.setHit(newHit);
-             System.out.println(chara.getName()+"の回避率が "+ chara.getAvoid()+" になった!!");
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
-             System.out.println(chara.getName()+"の命中率が "+ chara.getHit()+" になった!!");
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
+                System.out.println(chara.getName()+"の筋力が "+chara.getPower() + " になった!!");
+                
+                try{Thread.sleep(1000);
+                }catch(InterruptedException e){
+                }
 
-             break;
+                System.out.println(chara.getName()+"の丈夫さが "+chara.getDefence()+" になった!!");
+                
+                try{Thread.sleep(1000);
+                }catch(InterruptedException e){
+                }
+                break;
 
-             
-            }
+                case 2:
+
+                Random rndAvoid = new Random();
+                double upAvoid = rndAvoid.nextInt(21) + 10;
+                double newAvoid = chara.getAvoid() + upAvoid;
+                chara.setAvoid(newAvoid);
+
+                Random rndHit = new Random();
+                double upHit = rndHit.nextInt(21) + 10;
+                double newHit = chara.getHit() + upHit;
+                chara.setHit(newHit);
+                System.out.println(chara.getName()+"の回避率が "+ chara.getAvoid()+" になった!!");
+                try{Thread.sleep(1000);
+                }catch(InterruptedException e){
+                }
+                System.out.println(chara.getName()+"の命中率が "+ chara.getHit()+" になった!!");
+                try{Thread.sleep(1000);
+                }catch(InterruptedException e){
+                }
+
+                break;
+
+                
+                }
         }else{
         }
     }
@@ -147,8 +155,9 @@ public class Action {
 
               
                 if(isHit(chara.getHit(),boss.getAvoid()) == true){
-
-                    double D = 100 * chara.getPower() / boss.getDefence() / 5;
+                    Random rn = new Random();
+                    double ransuu = rn.nextInt(26) + 85;
+                    double D = 100 * chara.getPower() / boss.getDefence() / 5 * ransuu /100;
                     double Damage = Math.floor(D);
                     System.out.println(chara.getName()+" は "+boss.getName()+" を殴った!!");
                     try{Thread.sleep(1000);
@@ -182,11 +191,12 @@ public class Action {
               }
                 break;
         
-            case 1: //タックル。威力160。自分もダメージを20負う。
+            case 1: //タックル。威力180。自分もダメージを20負う。
               if(chara.getStamina() >= 40){
                  if(isHit(chara.getHit(), boss.getAvoid()) == true){
-
-                    double D = 160 * chara.getPower() / boss.getAvoid() / 5;
+                    Random rN = new Random();
+                    double ranSuu = rN.nextInt(26)  + 85;
+                    double D = 180 * chara.getPower() / boss.getDefence() / 5 * ranSuu / 100;
                     double Damage = Math.floor(D);
                     System.out.println(chara.getName()+" は "+boss.getName()+" にタックルした!!");
                     try{Thread.sleep(1000);
@@ -224,9 +234,15 @@ public class Action {
             case 2: //回復する技
                 double upValueOfHP = 50;
                 double newHP = chara.getHP() + upValueOfHP;
+                if(newHP >= chara.getMaxHP()){
+                    newHP = chara.getMaxHP();
+                }
                 chara.setHP(newHP);
                 double upValueOfStamina = 50;
                 double newStamina = chara.getStamina() + upValueOfStamina;
+                if(newStamina >= chara.getMaxStamina()){
+                    newStamina = chara.getMaxStamina();
+                }
                 chara.setStamina(newStamina);
                 System.out.println(chara.getName()+" のHPとスタミナが 50 回復した。");
                 try{Thread.sleep(1000);
@@ -396,6 +412,10 @@ public class Action {
                     newTired = 0;
                 }
                 chara.setTired(newTired);
+                System.out.println("休憩させた");
+                try{Thread.sleep(1000);
+                    }catch(InterruptedException e){
+                    }
                 System.out.println(chara.getName()+"の疲労度が "+chara.getTired()+" になった!!");
                 try{Thread.sleep(1000);
              }catch(InterruptedException e){
