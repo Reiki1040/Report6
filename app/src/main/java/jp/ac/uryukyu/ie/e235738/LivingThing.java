@@ -1,16 +1,16 @@
 package jp.ac.uryukyu.ie.e235738;
-import java.util.Random;
 
 //育成キャラ、ボスキャラクラスのスーパークラス。
 public class LivingThing {
-    private String name;
-    private double HP;
-    private double power;
-    private double defence;
-    private double avoid;
-    private double hit;
-    private double stamina;
-    private boolean dead;
+    protected String name;
+    protected double HP;
+    protected double maxHP;
+    protected double power;
+    protected double defence;
+    protected double avoid;
+    protected double hit;
+    protected double stamina;
+    protected boolean dead;
     
 
     public LivingThing(String name,double HP,double power,double defence,double avoid,double hit,double stamina){
@@ -40,6 +40,10 @@ public class LivingThing {
 
     public void setHP(double newHP){
         this.HP = newHP;
+    }
+
+    public void setMaxHP(double maxHP){
+        this.maxHP = maxHP;
     }
 
     public void setPower(double power){
@@ -73,6 +77,10 @@ public class LivingThing {
 
     public double getHP(){
         return this.HP;
+    }
+
+    public double getMaxHP(){
+        return this.maxHP;
     }
 
     public double getPower(){

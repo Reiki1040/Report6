@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class NurtureChara extends LivingThing { //育成するキャラのクラス
     private double loyalty;
     private double tired;
-    private double maxHP;
     private double maxStamina;
     ArrayList<Action> actions;
     ArrayList<Action> attacks;
@@ -39,16 +38,6 @@ public class NurtureChara extends LivingThing { //育成するキャラのクラ
             index +=1;
         }
     } 
-
-    
-
-    public double getMaxHP(){
-        return this.maxHP;
-    }
-
-    public void setMaxHP(double newMaxHP){
-        this.maxHP = newMaxHP;
-    }
 
     public double getMaxStamina(){
         return this.maxStamina;

@@ -14,7 +14,7 @@ public class GameMaster {
         }
     }
 
-    public void nurturing(NurtureChara chara,GameMaster Game){
+    public void nurturing(NurtureChara chara,GameMaster Game){ 
         int i = 0;
         for (int day = 1; day < 11;day ++){  //第一引数のキャラを育成するメソッド。
                 for(i = 0; i < 3; i++){
@@ -107,7 +107,7 @@ public class GameMaster {
         String name = scanner.nextLine();
 
        //育成するキャラを生成し、アクションも生成。
-        NurtureChara chara = new NurtureChara(name, 100, 10, 10, 100, 100,100,0, 0);
+        NurtureChara chara = new NurtureChara(name,100,10,10,100,100,100,0,0);
         Action  feeding = new Action(0, "ご飯をあげる");
         Action training = new Action(1,"鍛える");
         Action study = new Action(2, "勉強させる");
