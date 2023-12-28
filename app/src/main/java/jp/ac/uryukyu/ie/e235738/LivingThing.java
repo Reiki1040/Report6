@@ -1,5 +1,7 @@
 package jp.ac.uryukyu.ie.e235738;
 
+import java.util.ArrayList;
+
 //育成キャラ、ボスキャラクラスのスーパークラス。
 public class LivingThing {
     protected String name;
@@ -11,6 +13,7 @@ public class LivingThing {
     protected double hit;
     protected double stamina;
     protected boolean dead;
+    ArrayList<Action> attacks;
     
 
     public LivingThing(String name,double HP,double power,double defence,double avoid,double hit,double stamina){

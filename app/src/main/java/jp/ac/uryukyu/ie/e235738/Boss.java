@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Boss extends LivingThing{
 
-    ArrayList<Action> attacks;
-
     public Boss(String name,double HP,double power,double defence,double avoid,double hit,double stamina){
         super(name, HP, power, defence, avoid, hit,stamina);
         this.attacks = new ArrayList<>();

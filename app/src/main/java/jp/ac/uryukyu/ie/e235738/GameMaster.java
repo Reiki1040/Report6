@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class GameMaster { 
 
-     ArrayList<String> time;
+     ArrayList<String> time; //朝昼夜をいれる。
 
     public void timeKeep(int time){ //テキストを時間をおいて表示したいので作成。引数（ミリ秒）の秒数止める。
         try{Thread.sleep(time);
@@ -63,6 +63,7 @@ public class GameMaster {
             
             Scanner attackScanner = new Scanner(System.in);
             String attackSelect = attackScanner.nextLine();
+            attackScanner.close();
 
             try{int attackSelecter = Integer.parseInt(attackSelect);
 

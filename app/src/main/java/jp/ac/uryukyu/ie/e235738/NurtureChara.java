@@ -6,7 +6,6 @@ public class NurtureChara extends LivingThing { //育成するキャラのクラ
     private double tired;
     private double maxStamina;
     ArrayList<Action> actions;
-    ArrayList<Action> attacks;
 
     public NurtureChara(String name,double HP,double power,double defence,double avoid,double hit,double stamina,double loyalty,double tired){
         super(name,HP,power,defence,avoid,hit,stamina);
