@@ -49,41 +49,6 @@ public class GameMaster {
         }
     }
 
-    public void battle(NurtureChara chara,Boss boss,GameMaster Game){ //戦闘をするメソッド。第一引数に育成したキャラ、第二引数にボスキャラ。
-        while(chara.isDead() != true && boss.isDead() != true){
-
-            chara.showStatus(); //ターンの最初に育成キャラ、ボスキャラの順番でステータスを表示
-            boss.showStatus();
-            
-            System.out.println("行いたい行動の番号を指定してください。(半角入力)");
-
-            Game.timeKeep(1000);}
-
-            chara.showAttacks();
-            
-            Scanner attackScanner = new Scanner(System.in);
-            String attackSelect = attackScanner.nextLine();
-            attackScanner.close();
-
-            try{int attackSelecter = Integer.parseInt(attackSelect);
-
-            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss); //育成キャラがボスに攻撃。
-
-            }catch(NumberFormatException e){
-                System.out.println("数字を入力してください");
-            }
-                    if(boss.isDead()==true){ //ボスが倒れた時の処理。
-                        System.out.println("クリア!!!");
-                    }else{   //ボスが生きていた時の処理。
-                        Random RANDOM = new Random();
-                        int bossAttack = RANDOM.nextInt(5);
-                        boss.attack(bossAttack,chara,boss);
-                          if(chara.isDead()==true){ //育成キャラが倒れた時の処理。
-                              System.out.println("ゲームオーバー");
-                }
-            }
-    }
-
     GameMaster(ArrayList time){
         this.time = time;
     }
@@ -159,16 +124,7 @@ public class GameMaster {
 
         System.out.println("ゲームスタート!!!");
 
-        Game.timeKeep(1000);     
-
-        Game.nurturing(chara,Game); //育成を行う。
-
-        System.out.println("育成お疲れ様でした。");
-
-        Game.timeKeep(1000);      
-
-        chara.setMaxHP(chara.getHP());//現時点でのHPをHPの最大値とする。
-        chara.setMaxStamina(chara.getStamina());//現時点でのスタミナをスタミナの最大値とする。
+        Game.timeKeep(1000);   
 
         System.out.println("-------11日目-------");
 
@@ -187,8 +143,33 @@ public class GameMaster {
 
         Game.timeKeep(1500);
 
-        Game.battle(chara, boss, Game); //戦闘を行う。
+        while(chara.isDead() != true && boss.isDead() != true){
+            chara.showStatus();
+            boss.showStatus();
 
+            System.out.println("行いたい行動の番号を指定してください。");
+            try{ Thread.sleep(500);
+            }catch(InterruptedException e){
+            }
+            chara.showAttacks();
+
+            Scanner attackScanner = new Scanner(System.in);
+            String attackSelect = attackScanner.nextLine();
+            int attackSelecter = Integer.parseInt(attackSelect);
+
+            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss);
+            if(boss.isDead()==true){
+                System.out.println("クリア!!!");
+            }else{
+                Random RANDOM = new Random();
+            int bossAttack = RANDOM.nextInt(5);
+            boss.attack(bossAttack,chara,boss);
+                if(chara.isDead()==true){
+                    System.out.println("ゲームオーバー");
+                }
+            }
+
+        }
         } 
 
     }
