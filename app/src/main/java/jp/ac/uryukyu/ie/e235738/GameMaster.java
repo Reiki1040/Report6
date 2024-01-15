@@ -46,7 +46,8 @@ public class GameMaster {
 
     public void nurturing(NurtureChara chara,GameMaster Game){ 
         int i = 0;
-        for (int day = 1; day < 11;day ++){  //第一引数のキャラを育成するメソッド。
+        int dayLimit = 11;
+        for (int day = 1; day < dayLimit;day ++){  //第一引数のキャラを育成するメソッド。
                 for(i = 0; i < 3; i++){
                     System.out.println("---- "+day+ " 日目---- "+ time.get(i));
                     Game.timeKeep(700);
