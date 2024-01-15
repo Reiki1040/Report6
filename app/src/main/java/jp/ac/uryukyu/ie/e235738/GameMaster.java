@@ -14,6 +14,36 @@ public class GameMaster {
         }
     }
 
+    public void battle(NurtureChara chara,Boss boss){  //第一引数のキャラと第二引数のキャラを戦わせるメソッド。
+        while(chara.isDead() != true && boss.isDead() != true){
+            chara.showStatus();
+            boss.showStatus();
+
+            System.out.println("行いたい行動の番号を指定してください。");
+            try{ Thread.sleep(500);
+            }catch(InterruptedException e){
+            }
+            chara.showAttacks();
+
+            Scanner attackScanner = new Scanner(System.in);
+            String attackSelect = attackScanner.nextLine();
+            int attackSelecter = Integer.parseInt(attackSelect);
+
+            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss);
+            if(boss.isDead()==true){
+                System.out.println("クリア!!!");
+            }else{
+                Random RANDOM = new Random();
+            int bossAttack = RANDOM.nextInt(5);
+            boss.attack(bossAttack,chara,boss);
+                if(chara.isDead()==true){
+                    System.out.println("ゲームオーバー");
+                }
+            }
+
+        }
+    }
+
     public void nurturing(NurtureChara chara,GameMaster Game){ 
         int i = 0;
         for (int day = 1; day < 11;day ++){  //第一引数のキャラを育成するメソッド。
@@ -98,7 +128,7 @@ public class GameMaster {
 
         Game.timeKeep(1000);
         
-        System.out.println(chara.getName()+" が産まれました!!");
+        System.out.println(chara.getName()+" が産まれました!!");  
         
         Game.timeKeep(1000);
 
@@ -126,6 +156,8 @@ public class GameMaster {
 
         Game.timeKeep(1000);   
 
+        Game.nurturing(chara, Game);   //育成 
+
         System.out.println("-------11日目-------");
 
         Game.timeKeep(1000);
@@ -143,34 +175,10 @@ public class GameMaster {
 
         Game.timeKeep(1500);
 
-        while(chara.isDead() != true && boss.isDead() != true){
-            chara.showStatus();
-            boss.showStatus();
-
-            System.out.println("行いたい行動の番号を指定してください。");
-            try{ Thread.sleep(500);
-            }catch(InterruptedException e){
-            }
-            chara.showAttacks();
-
-            Scanner attackScanner = new Scanner(System.in);
-            String attackSelect = attackScanner.nextLine();
-            int attackSelecter = Integer.parseInt(attackSelect);
-
-            chara.attacks.get(attackSelecter).charaAttack(chara,attackSelecter,boss);
-            if(boss.isDead()==true){
-                System.out.println("クリア!!!");
-            }else{
-                Random RANDOM = new Random();
-            int bossAttack = RANDOM.nextInt(5);
-            boss.attack(bossAttack,chara,boss);
-                if(chara.isDead()==true){
-                    System.out.println("ゲームオーバー");
-                }
-            }
+        Game.battle(chara, boss);  //戦闘
 
         }
         } 
 
-    }
+    
 

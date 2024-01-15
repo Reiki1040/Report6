@@ -445,6 +445,7 @@ public class Action {
             study(chara, 13);
             
             break;
+            
             case 3: // 遊ぶ処理。(忠誠度をあげる。)
 
             play(chara); //遊ぶ処理。(忠誠度を1上昇させる。)
