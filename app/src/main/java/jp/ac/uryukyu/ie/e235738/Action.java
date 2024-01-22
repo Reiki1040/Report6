@@ -269,7 +269,9 @@ public class Action {
                     if(newHP >= chara.getMaxHP()){ //最大HPよりnewHPが大きくならないようにする。
                         newHP = chara.getMaxHP();
                     }
+
                 chara.setHP(newHP);
+
                 double upValueOfStamina = 50; //スタミナの回復する値。
                 double newStamina = chara.getStamina() + upValueOfStamina;
                     if(newStamina >= chara.getMaxStamina()){ //スタミナの最大値よりnewStainaが大きくならないようにする。
@@ -445,7 +447,7 @@ public class Action {
             study(chara, 13);
             
             break;
-            
+
             case 3: // 遊ぶ処理。(忠誠度をあげる。)
 
             play(chara); //遊ぶ処理。(忠誠度を1上昇させる。)

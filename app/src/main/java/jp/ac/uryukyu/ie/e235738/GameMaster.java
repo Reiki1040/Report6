@@ -70,6 +70,7 @@ public class GameMaster {
                         chara.actions.get(actSelecter).doAction(chara);
                     }catch(NumberFormatException e){
                         System.out.println("数字を入力してください。");
+                        
                     }
 
                         if(time.get(i) == "夜"){
@@ -129,7 +130,7 @@ public class GameMaster {
 
         Game.timeKeep(1000);
         
-        System.out.println(chara.getName()+" が産まれました!!");  
+        System.out.println(chara.getName()+" が産まれました!!");   
         
         Game.timeKeep(1000);
 
@@ -137,7 +138,7 @@ public class GameMaster {
 
         Game.timeKeep(1000);
 
-        System.out.println("このゲームのルールを説明します。");
+        System.out.println("このゲームのルールを説明します。");  
 
         Game.timeKeep(1000);
 
@@ -157,11 +158,13 @@ public class GameMaster {
 
         Game.timeKeep(1000);   
 
-        Game.nurturing(chara, Game);   //育成 
-
+        Game.nurturing(chara, Game);   //育成        
+      
         System.out.println("-------11日目-------");
 
         Game.timeKeep(1000);
+
+        chara.setMaxHP(chara.getHP());
 
         Boss boss = new Boss("デンチウ", 220, 50, 50, 140, 150, 5000); //ボス生成。
         boss.setMaxHP(220);
